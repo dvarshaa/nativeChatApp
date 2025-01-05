@@ -2,9 +2,18 @@
 import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
-import { initializeAuth, getReactNativePersistence } from "firebase/auth";
+
+//@ts-ignore
+import { initializeAuth, getReactNativePersistence } from "@firebase/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getFirestore, collection } from "firebase/firestore";
+import { Platform } from "react-native";
+import { browserSessionPersistence } from "firebase/auth/cordova";
+
+const persistence =
+  Platform.OS === "web"
+    ? browserSessionPersistence
+    : getReactNativePersistence(AsyncStorage);
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -20,10 +29,10 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 export const auth = initializeAuth(app, {
-  persistence: getReactNativePersistence(AsyncStorage),
+  persistence,
 });
 
 export const db = getFirestore(app);
 
-export const usersRef = collection(db, 'users');
-export const roomRef = collection(db, 'room');
+export const usersRef = collection(db, "users");
+export const roomRef = collection(db, "room");

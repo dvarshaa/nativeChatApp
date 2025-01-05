@@ -18,9 +18,12 @@ import { Feather, Octicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import Loading from "../components/Loading";
 import CustomKeyboardView from "../components/CustomKeyboardView";
+import { useAuth } from "../context/authContext";
 
 const SignUp = () => {
   const router = useRouter();
+  const {register} = useAuth();
+
   const [isLoading, setIsLoading] = useState(false);
 
   const emailRef = useRef("");
@@ -34,6 +37,14 @@ const SignUp = () => {
     }
 
     //Signup logic
+    setIsLoading(true);
+    const response = await register(emailRef.current, passwordRef.current, usernameRef.current);
+    setIsLoading(false);
+
+    console.log(response);
+    if(!response.success) {
+        Alert.alert('Sign Up', response.msg);
+    }
   };
 
   return (
