@@ -29,6 +29,7 @@ const HomeHeader = () => {
 
   return (
     <SafeAreaView
+      style={{ padding: 20 }}
       className="flex-row justify-between px-5 bg-indigo-400 rounded-b-3xl shadow"
     >
       <Text style={{ fontSize: hp(3) }} className="font-medium text-white">
@@ -68,10 +69,8 @@ const HomeHeader = () => {
 export default HomeHeader;
 
 const Divider = () => {
-  return(
-    <View className="p-[1px] w-full bg-neutral-200"/>
-  )
-}
+  return <View className="p-[1px] w-full bg-neutral-200" />;
+};
 
 const menuOptionsStyles = {
   optionsContainer: {
@@ -81,4 +80,3 @@ const menuOptionsStyles = {
     width: 160,
   },
 };
-

@@ -7,10 +7,12 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import ChatList from "../../components/ChatList";
+import { query, where, getDocs } from "firebase/firestore";
+import { usersRef } from "../../firebaseConfig";
 
 const Home = () => {
   const { user } = useAuth();
-  const [users, setUsers] = useState([1,2,3]);
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     if(user?.uid) {
@@ -19,8 +21,24 @@ const Home = () => {
   }, []);
 
   const getUsers = async () => {
-
-  }
+    try {
+      const q = query(usersRef); // Fetch all users
+      const querySnapshot = await getDocs(q);
+      let data = [];
+  
+      querySnapshot.forEach(doc => {
+        const userData = doc.data();
+        if (userData.userId !== user?.uid) {
+          data.push({ ...userData });
+        }
+      });
+  
+      setUsers(data);
+      console.log(data);
+    } catch (error) {
+      console.error("Error fetching users:", error.message);
+    }
+  };
   
 
   return (
