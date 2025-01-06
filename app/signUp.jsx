@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Pressable,
   Alert,
+  ActivityIndicator,
 } from "react-native";
 import React, { useRef, useState } from "react";
 import {
@@ -16,7 +17,6 @@ import { StatusBar } from "expo-status-bar";
 import signUpImg from "../assets/images/signUp.png";
 import { Feather, Octicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import Loading from "../components/Loading";
 import CustomKeyboardView from "../components/CustomKeyboardView";
 import { useAuth } from "../context/authContext";
 
@@ -119,8 +119,8 @@ const SignUp = () => {
             <View>
               {isLoading && (
                 <View className="flex-row justify-center">
-                  {" "}
-                  <Loading size={hp(7)} />{" "}
+                  
+                  <ActivityIndicator size="small" color="#3949AB" />
                 </View>
               )}
               {!isLoading && (

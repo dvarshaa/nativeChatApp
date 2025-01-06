@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Pressable,
   Alert,
+  ActivityIndicator,
 } from "react-native";
 import React, { useRef, useState } from "react";
 import {
@@ -16,7 +17,6 @@ import { StatusBar } from "expo-status-bar";
 import loginImg from "../assets/images/login.png";
 import { Octicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import Loading from "../components/Loading";
 import CustomKeyboardView from "../components/CustomKeyboardView";
 import { useAuth } from "../context/authContext";
 
@@ -107,7 +107,7 @@ const SignIn = () => {
             </View>
 
             <View>
-              {isLoading && <View className="flex-row justify-center"> <Loading size={hp(7)}/> </View>  }
+              {isLoading && <View className="flex-row justify-center"> <ActivityIndicator size="small" color="#3949AB" /> </View>  }
               {!isLoading && (
                 <TouchableOpacity
                 onPress={handleLogin}
