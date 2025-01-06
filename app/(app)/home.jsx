@@ -34,7 +34,6 @@ const Home = () => {
       });
   
       setUsers(data);
-      console.log(data);
     } catch (error) {
       console.error("Error fetching users:", error.message);
     }
@@ -44,7 +43,7 @@ const Home = () => {
   return (
     <View className="flex-1 bg-white">
       <StatusBar style="light" />
-      {users?.length && (<ChatList users={users} />)}
+      {users?.length && (<ChatList currentUser={user} users={users} />)}
       {!users?.length && (<View style={{top: hp(30)}} className="flex items-center">
         <ActivityIndicator size="large" color="#3949AB"/>
       </View>)}

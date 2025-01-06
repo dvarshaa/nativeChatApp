@@ -41,7 +41,6 @@ const SignUp = () => {
     const response = await register(emailRef.current, passwordRef.current, usernameRef.current);
     setIsLoading(false);
 
-    console.log(response);
     if(!response.success) {
         Alert.alert('Sign Up', response.msg);
     }
